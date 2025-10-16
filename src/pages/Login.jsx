@@ -14,12 +14,17 @@ const { login } = useAuth();
 const nav = useNavigate();
 
 
+
+
 async function sendOtp(e) {
 e.preventDefault();
 setError('');
 setLoading(true);
 try {
-await requestOtp(email);
+const otpResult = await requestOtp(email);
+
+ console.log(otpResult.otp)
+alert(`This is required otp : ${otpResult.otp}`);
 setStage('otp');
 } catch (e) {
 setError(e?.response?.data?.message || 'Failed to send OTP');
@@ -53,12 +58,14 @@ return (
 <button className="btn btn-primary" disabled={loading}>{loading ? 'Sending...' : 'Send OTP'}</button>
 </form>
 ) : (
+
 <form onSubmit={handleVerify}>
 <input className="input" type="text" placeholder="Enter OTP" value={otp} onChange={e => setOtp(e.target.value)} required />
 <button className="btn btn-primary" disabled={loading}>{loading ? 'Verifying...' : 'Verify & Login'}</button>
 </form>
 )}
 
+ 
 
 <p className="small" style={{ marginTop: 12 }}>No account? <Link to="/signup">Signup</Link></p>
 </div>
