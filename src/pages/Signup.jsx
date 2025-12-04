@@ -22,7 +22,7 @@ setLoading(true);
 try {
 const otpresult=await requestOtp(email);
 console.log(otpresult.otp);
-alert(`Please note down the otp for future : ${otpresult.otp}`);
+alert(`Please note down the otp for future purpose : ${otpresult.otp}`);
 setStage('otp');
 } catch (e) {
 setError(e?.response?.data?.message || 'Failed to send OTP');
